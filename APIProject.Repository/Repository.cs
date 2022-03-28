@@ -1,6 +1,6 @@
 ﻿namespace APIProject.Repository
 {
-    internal class Repository
+    public class Repository
     {
     }
 }
