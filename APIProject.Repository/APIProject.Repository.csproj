@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="APIProject.Models">
+      <HintPath>..\APIProject.Models\bin\Debug\net6.0\APIProject.Models.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
