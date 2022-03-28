@@ -1,5 +1,5 @@
 ﻿namespace APIProject.Models;
-public class Book
+public class Book : Entity
 {
     public int IBAN { get; set; }
 

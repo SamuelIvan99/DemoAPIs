@@ -3,5 +3,5 @@
 namespace APIProject.Repository.Interfaces;
 public interface ILibraryRepository : IRepository<Library>
 {
-    Task<Library> GetByNameAsync(string name);
+    Task<Library?> GetByNameAsync(string name);
 }

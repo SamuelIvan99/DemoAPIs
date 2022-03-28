@@ -1,9 +1,6 @@
 ﻿namespace APIProject.Models;
-public class Library
+public class Library : Entity
 {
-    public int Id { get; set; }
-
-
     public string Name { get; set; } = string.Empty;
 
     public Address Address { get; set; } = new();
