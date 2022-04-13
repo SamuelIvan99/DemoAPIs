@@ -6,7 +6,6 @@ using System.Reflection;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddSingleton<ILibraryRepository, LibraryRepository>();
 builder.Services.AddSingleton<IBookRepository, BookRepository>();
 
 builder.Services.AddControllers();
@@ -19,7 +18,7 @@ builder.Services.AddSwaggerGen(
         {
             Version = "v1",
             Title = "REST API Demo",
-            Description = "REST API Level 3 Demo Application in .NET 6",
+            Description = "REST API Demo Application in .NET 6",
         });
 
         var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";

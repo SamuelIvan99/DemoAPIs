@@ -1,7 +1,10 @@
-﻿namespace APIProject.Models;
+﻿using System.Text.Json.Serialization;
+
+namespace APIProject.Models;
 public class Book : Entity
 {
-    public int IBAN { get; set; }
+    [JsonIgnore]
+    public string IBAN { get; set; } = Guid.NewGuid().ToString();
 
     public string Title { get; set; } = string.Empty;
 
