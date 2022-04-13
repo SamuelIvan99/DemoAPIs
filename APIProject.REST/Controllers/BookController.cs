@@ -23,7 +23,8 @@ public class BookController : ControllerBase
     /// <summary>
     /// Get all Book entities from the container.
     /// </summary>
-    /// <returns>List of Book entities</returns>
+    /// <returns>List of Book entities.</returns>
+    /// <response code="200">Returns list of all entities.</response>
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Book>>> GetAll()
     {
@@ -35,21 +36,25 @@ public class BookController : ControllerBase
     /// Get Book by id from the container.
     /// </summary>
     /// <param name="id">Id of a Book entity</param>
-    /// <returns>Book entity</returns>
+    /// <returns>Found Book entity.</returns>
+    /// <response code="200">Returns entity, else null if not found.</response>
     [HttpGet("{id}")]
-    public async Task<ActionResult<IEnumerable<Book>>> GetById([FromQuery] int id)
+    public async Task<ActionResult<IEnumerable<Book>>> GetById(int id)
     {
         var result = await _bookRepository.GetAsync(id);
-        return Ok(result);
+        if (result is not null)
+            return Ok(result);
+        else
+            return Ok("null");
     }
 
     /// <summary>
     /// Create Book entity and store it in the container.
     /// </summary>
     /// <param name="book">Book entity to be created</param>
-    /// <returns>Created Book entity</returns>
-    /// <response code="201">Returns the newly created entity</response>
-    /// <response code="400">Returns bad request</response>
+    /// <returns>Created Book entity.</returns>
+    /// <response code="201">Returns newly created entity.</response>
+    /// <response code="400">Returns bad request.</response>
     [HttpPost()]
     public async Task<ActionResult<Book>> Create([FromBody] Book book)
     {
@@ -65,6 +70,8 @@ public class BookController : ControllerBase
     /// </summary>
     /// <param name="book">Book entity to be updated</param>
     /// <returns>Boolean if it was updated or not.</returns>
+    /// <response code="200">Returns updated entity.</response>
+    /// <response code="400">Entity was not updated.</response>
     [HttpPatch]
     public async Task<ActionResult<Book>> Update([FromBody] Book book)
     {
@@ -80,6 +87,8 @@ public class BookController : ControllerBase
     /// </summary>
     /// <param name="id">Id of a Book entity</param>
     /// <returns>Nothing if deleted successfully, otherwise false.</returns>
+    /// <response code="204">Entity delete successfully.</response>
+    /// <response code="200">Entity was not deleted.</response>
     [HttpDelete("{id}")]
     public async Task<ActionResult<bool>> Delete(int id)
     {
