@@ -11,11 +11,19 @@ public static class APIConsumer
         return await response.Content.ReadAsStringAsync();
     }
 
-    public static async Task<BookReply> gRPCGetById(int id, string url = "https://localhost:7254")
+    public static async Task<Book?> gRPCGetById(string id, string url = "https://localhost:7254")
     {
         using var channel = GrpcChannel.ForAddress(url);
         var client = new CrudBook.CrudBookClient(channel);
-        var reply = client.GetById(new BookRequest { Id = id, Title = "" });
+        var reply = await client.GetByIdAsync(new Book { Iban = id, Title = "", Author = "", PagesNo = 0 });
         return reply;
+    }
+
+    public static async Task<string> gRPCCreate(Book book, string url = "https://localhost:7254")
+    {
+        using var channel = GrpcChannel.ForAddress(url);
+        var client = new CrudBook.CrudBookClient(channel);
+        var reply = await client.CreateAsync(book);
+        return reply.Message;
     }
 }

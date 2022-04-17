@@ -1,6 +1,5 @@
+using APIProject.gRPC.Repository;
 using APIProject.gRPC.Services;
-using APIProject.Repository;
-using APIProject.Repository.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,5 +1,4 @@
-using APIProject.Models;
-using APIProject.Repository.Interfaces;
+using APIProject.gRPC.Repository;
 using Grpc.Core;
 
 namespace APIProject.gRPC.Services
@@ -16,22 +15,35 @@ namespace APIProject.gRPC.Services
 
         //public override async Task<BooksReply> GetAll(EmptyRequest request, ServerCallContext context)
         //{
-        //    var result = await _bookRepository.GetAllAsync();
-        //    BooksReply books = new BooksReply { Books = new List<BookReply>() };
-        //    return;
+        //    var result = 
+        //    return Task.FromResult(await _bookRepository.GetAllAsync());
         //}
 
-        public override async Task<BookReply> GetById(BookRequest request, ServerCallContext context)
+        public override async Task<Book> GetById(Book request, ServerCallContext context)
         {
-            Book? result = await _bookRepository.GetAsync(request.Id);
-            return new BookReply
-            {
-                Id = result.Id,
-                Iban = result.IBAN,
-                Title = result.Title,
-                Author = result.Author,
-                PagesNo = result.PagesNo
-            };
+            var result = await _bookRepository.GetAsync(request.Iban);
+            if (result is null)
+                return new Book { Iban = "", Title = "", Author = "", PagesNo = 0 };
+            else
+                return result;
+        }
+
+        public override async Task<Book> GetByTitle(Book request, ServerCallContext context)
+        {
+            var result = await _bookRepository.GetByTitleAsync(request.Title);
+            if (result is null)
+                return new Book { Iban = "", Title = "", Author = "", PagesNo = 0 };
+            else
+                return result;
+        }
+
+        public override async Task<Reply> Create(Book request, ServerCallContext context)
+        {
+            var result = await _bookRepository.CreateAsync(request);
+            if (result)
+                return new Reply { Message = "Book created successfully." };
+            else
+                return new Reply { Message = "Failed to create a Book entity." };
         }
     }
 }

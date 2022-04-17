@@ -13,14 +13,5 @@
   <ItemGroup>
     <PackageReference Include="Grpc.AspNetCore" Version="2.40.0" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="APIProject.Models">
-      <HintPath>..\APIProject.Models\bin\Debug\net6.0\APIProject.Models.dll</HintPath>
-    </Reference>
-    <Reference Include="APIProject.Repository">
-      <HintPath>..\APIProject.Repository\bin\Debug\net6.0\APIProject.Repository.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
+	
 </Project>
