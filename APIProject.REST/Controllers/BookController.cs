@@ -49,6 +49,22 @@ public class BookController : ControllerBase
     }
 
     /// <summary>
+    /// Get Book by title from the container.
+    /// </summary>
+    /// <param name="title">Title of a Book entity</param>
+    /// <returns>Found Book entity.</returns>
+    /// <response code="200">Returns entity, else null if not found.</response>
+    [HttpGet("{id}")]
+    public async Task<ActionResult<Book>> GetById(string title)
+    {
+        var result = await _bookRepository.GetByTitleAsync(title);
+        if (result is not null)
+            return Ok(result);
+        else
+            return Ok("null");
+    }
+
+    /// <summary>
     /// Create Book entity and store it in the container.
     /// </summary>
     /// <param name="book">Book entity to be created</param>

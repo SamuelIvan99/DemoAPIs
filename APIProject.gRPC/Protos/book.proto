@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+option csharp_namespace = "APIProject.gRPC";
+
+package book;
+
+// The book service definition.
+service CrudBook {
+  rpc GetAll (EmptyRequest) returns (BooksReply);
+
+  rpc GetById(BookRequest) returns (BookReply);
+
+  rpc GetByTitle(BookRequest) returns (BookReply);
+}
+
+message BookRequest{
+  int32 id = 1;
+  string title = 2;
+}
+
+message EmptyRequest{
+
+}
+
+message BooksReply {
+  repeated BookReply books = 1;
+}
+
+message BookReply {
+  int32 id = 1;
+  string iban = 2;
+  string title = 3;
+  string author = 4;
+  int32 pages_no = 5;
+}
