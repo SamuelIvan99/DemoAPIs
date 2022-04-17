@@ -39,7 +39,7 @@ public class BookController : ControllerBase
     /// <returns>Found Book entity.</returns>
     /// <response code="200">Returns entity, else null if not found.</response>
     [HttpGet("{id}")]
-    public async Task<ActionResult<IEnumerable<Book>>> GetById(int id)
+    public async Task<ActionResult<Book>> GetById(string id)
     {
         var result = await _bookRepository.GetAsync(id);
         if (result is not null)
@@ -54,8 +54,8 @@ public class BookController : ControllerBase
     /// <param name="title">Title of a Book entity</param>
     /// <returns>Found Book entity.</returns>
     /// <response code="200">Returns entity, else null if not found.</response>
-    [HttpGet("{id}")]
-    public async Task<ActionResult<Book>> GetById(string title)
+    [HttpGet("title/{title}")]
+    public async Task<ActionResult<IEnumerable<Book>>> GetByTitle(string title)
     {
         var result = await _bookRepository.GetByTitleAsync(title);
         if (result is not null)
@@ -76,7 +76,7 @@ public class BookController : ControllerBase
     {
         var result = await _bookRepository.CreateAsync(book);
         if (result)
-            return CreatedAtAction(nameof(GetById), new { id = book.Id }, book);
+            return CreatedAtAction(nameof(GetById), new { id = book.IBAN }, book);
         else
             return BadRequest();
     }
@@ -106,7 +106,7 @@ public class BookController : ControllerBase
     /// <response code="204">Entity delete successfully.</response>
     /// <response code="200">Entity was not deleted.</response>
     [HttpDelete("{id}")]
-    public async Task<ActionResult<bool>> Delete(int id)
+    public async Task<ActionResult<bool>> Delete(string id)
     {
         var result = await _bookRepository.DeleteAsync(id);
         if (result)
