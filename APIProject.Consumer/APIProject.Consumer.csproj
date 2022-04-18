@@ -17,12 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="APIProject.Models">
-      <HintPath>..\APIProject.Models\bin\Debug\net6.0\APIProject.Models.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
 	<Protobuf Include="Protos\book.proto" GrpcServices="Client" />
   </ItemGroup>
 </Project>

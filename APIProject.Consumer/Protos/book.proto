@@ -15,11 +15,6 @@ service CrudBook {
   rpc Create(Book) returns (Reply);
 }
 
-message BookRequest{
-  int32 id = 1;
-  string title = 2;
-}
-
 message EmptyRequest{
 }
 

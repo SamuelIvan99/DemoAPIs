@@ -13,12 +13,6 @@ namespace APIProject.gRPC.Services
             _bookRepository = bookRepository;
         }
 
-        //public override async Task<BooksReply> GetAll(EmptyRequest request, ServerCallContext context)
-        //{
-        //    var result = 
-        //    return Task.FromResult(await _bookRepository.GetAllAsync());
-        //}
-
         public override async Task<Book> GetById(Book request, ServerCallContext context)
         {
             var result = await _bookRepository.GetAsync(request.Iban);

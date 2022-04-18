@@ -45,7 +45,7 @@ public class BookController : ControllerBase
         if (result is not null)
             return Ok(result);
         else
-            return Ok("null");
+            return Ok(new Book { IBAN = "", Title = "", Author = "", PagesNo = 0 });
     }
 
     /// <summary>
@@ -71,7 +71,7 @@ public class BookController : ControllerBase
     /// <returns>Created Book entity.</returns>
     /// <response code="201">Returns newly created entity.</response>
     /// <response code="400">Returns bad request.</response>
-    [HttpPost()]
+    [HttpPost]
     public async Task<ActionResult<Book>> Create([FromBody] Book book)
     {
         var result = await _bookRepository.CreateAsync(book);
