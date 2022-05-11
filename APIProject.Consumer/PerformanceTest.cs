@@ -6,22 +6,58 @@ namespace APIProject.Consumer
     {
         public static async Task testRESTCreate()
         {
-            int n = 10;
-            int count = 10;
+            var values = new List<long>();
+            int n = 100;
+            int count = 1;
+
             for (int j = 0; j < n; j++)
             {
                 Stopwatch s = new Stopwatch();
                 s.Start();
                 for (int i = 0; i < count; i++)
                 {
-                    var restBook = new APIProject.Consumer.Models.Book { IBAN = $"{i + (i * j)}", Title = "Book1", Author = "Author1", PagesNo = 100 };
+                    var restBook = new APIProject.Consumer.Models.Book { IBAN = $"{Guid.NewGuid()}", Title = "Title1", Author = "Author1", PagesNo = 100 };
                     await APIConsumer.RESTCreate(restBook);
                 }
                 s.Stop();
                 long time = s.ElapsedMilliseconds;
-                //double time = t.check() * 1e9 / count;
+                values.Add(time);
                 Console.WriteLine($"{j}: {time} ms");
             }
+            CalculateStatistics(values);
+        }
+
+        public static async Task testgRPCCreate()
+        {
+            var values = new List<long>();
+            int n = 100;
+            int count = 1;
+
+            for (int j = 0; j < n; j++)
+            {
+                Stopwatch s = new Stopwatch();
+                s.Start();
+                for (int i = 0; i < count; i++)
+                {
+                    var restBook = new APIProject.Consumer.Book { Iban = $"{Guid.NewGuid()}", Title = "Title1", Author = "Author1", PagesNo = 100 };
+                    await APIConsumer.gRPCCreate(restBook);
+                }
+                s.Stop();
+                long time = s.ElapsedMilliseconds;
+                values.Add(time);
+                Console.WriteLine($"{j}: {time} ms");
+            }
+            CalculateStatistics(values);
+        }
+
+        public static void CalculateStatistics(List<long> values)
+        {
+            Console.WriteLine("-----------------------------------------");
+            var mean = values.Average();
+            Console.WriteLine($"Mean: {mean} ms");
+            var sum = values.Sum(d => Math.Pow(d - mean, 2));
+            var std = Math.Sqrt((sum) / values.Count());
+            Console.WriteLine($"Standard Deviation: +/- {std} ms");
         }
     }
 }

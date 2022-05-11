@@ -7,7 +7,7 @@ Console.WriteLine("------------------------------------------");
 //var restBook = await APIConsumer.RESTGetById(id: "1");
 //Console.WriteLine($"Book - IBAN: {restBook?.IBAN}, Title: {restBook?.Title}, Author: {restBook?.Author}, Pages: {restBook?.PagesNo}");
 
-//restBook = new APIProject.Consumer.Models.Book { IBAN = "1", Title = "Book1", Author = "Author1", PagesNo = 100 };
+//var restBook = new APIProject.Consumer.Models.Book { IBAN = "0", Title = "Book1", Author = "Author1", PagesNo = 100 };
 //var restResult = await APIConsumer.RESTCreate(restBook);
 //Console.WriteLine($"Created: {restResult}");
 
@@ -29,6 +29,7 @@ Console.WriteLine("------------------------------------------");
 
 //var grpcBook1 = await APIConsumer.gRPCGetById(id: "1");
 //Console.WriteLine($"Book - IBAN: {grpcBook1?.Iban}, Title: {grpcBook1?.Title}, Author: {grpcBook1?.Author}, Pages: {grpcBook1?.PagesNo}");
+await PerformanceTest.testgRPCCreate();
 
 Console.WriteLine("------------------------------------------");
 Console.WriteLine("\n");
