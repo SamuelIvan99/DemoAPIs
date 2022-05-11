@@ -13,7 +13,10 @@ Console.WriteLine("------------------------------------------");
 
 //var restBook1 = await APIConsumer.RESTGetById(id: "1");
 //Console.WriteLine($"Book - IBAN: {restBook1?.IBAN}, Title: {restBook1?.Title}, Author: {restBook1?.Author}, Pages: {restBook1?.PagesNo}");
-await PerformanceTest.testRESTCreate();
+//await PerformanceTest.testRESTCreate(1);
+//await PerformanceTest.testRESTCreate(10);
+//await PerformanceTest.testRESTCreate(100);
+//await PerformanceTest.testRESTCreate(1000);
 
 Console.WriteLine("------------------------------------------");
 Console.WriteLine("\n");
@@ -29,7 +32,10 @@ Console.WriteLine("------------------------------------------");
 
 //var grpcBook1 = await APIConsumer.gRPCGetById(id: "1");
 //Console.WriteLine($"Book - IBAN: {grpcBook1?.Iban}, Title: {grpcBook1?.Title}, Author: {grpcBook1?.Author}, Pages: {grpcBook1?.PagesNo}");
-await PerformanceTest.testgRPCCreate();
+await PerformanceTest.testgRPCCreate(1);
+await PerformanceTest.testgRPCCreate(10);
+await PerformanceTest.testgRPCCreate(100);
+//await PerformanceTest.testgRPCCreate(1000);
 
 Console.WriteLine("------------------------------------------");
 Console.WriteLine("\n");

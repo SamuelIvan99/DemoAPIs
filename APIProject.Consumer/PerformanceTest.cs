@@ -4,11 +4,11 @@ namespace APIProject.Consumer
 {
     public static class PerformanceTest
     {
-        public static async Task testRESTCreate()
+        public static async Task testRESTCreate(int noOfRequests)
         {
             var values = new List<long>();
             int n = 100;
-            int count = 1;
+            int count = noOfRequests;
 
             for (int j = 0; j < n; j++)
             {
@@ -27,11 +27,11 @@ namespace APIProject.Consumer
             CalculateStatistics(values);
         }
 
-        public static async Task testgRPCCreate()
+        public static async Task testgRPCCreate(int noOfRequests)
         {
             var values = new List<long>();
             int n = 100;
-            int count = 1;
+            int count = noOfRequests;
 
             for (int j = 0; j < n; j++)
             {
